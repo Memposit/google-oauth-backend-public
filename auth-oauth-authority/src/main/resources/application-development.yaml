@@ -1,0 +1,42 @@
+server:
+  port: 8084
+  tomcat:
+    relaxed-query-chars: '|,{,},[,]'
+gateway:
+  service:
+    url: http://localhost:8080/login/oauth2/code/{registrationId}
+spring:
+  application:
+    name: auth-oauth-authority
+  datasource:
+    url: jdbc:mysql://localhost:3306/memposit-google-oauth2?createDatabaseIfNotExist=true
+    username: root
+    password: password
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 787695643713-kof6itn0efdhrr96otqtc8qrb38bbggm.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: ${gateway.service.url}
+            scope:
+              - email
+              - profile
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+cookie:
+  expire:
+    seconds: 180
+token:
+  expired:
+    date: 1400
+app:
+  tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+  tokenExpirationMsec: 864000000
+  authorizedRedirectUris: http://localhost:4200/oauth2/redirect

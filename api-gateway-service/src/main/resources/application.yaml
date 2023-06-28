@@ -1,0 +1,28 @@
+spring:
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: 'true'
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: '*'
+            allowed-origin-patterns: "*"
+            allowedHeaders: '*'
+            allowedMethods: '*'
+        add-to-simple-url-handler-mapping: 'true'
+  application:
+    name: api-gateway-services
+logging:
+  level:
+    web: DEBUG
+server:
+  port: 8080
+app:
+  tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+  tokenExpirationMsec: 864000000
+  authorizedRedirectUris: http://localhost:4200/oauth2/redirect
+
